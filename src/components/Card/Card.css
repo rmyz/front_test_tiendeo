@@ -1,0 +1,22 @@
+.Card {
+  max-width: 210px;
+  border: 1px darkgray solid;
+  border-radius: 5px;
+  margin: 8px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.Card__title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.Card__image {
+  border-radius: 5px 5px 0 0; 
+}
+
+.Card__description {
+  font-size: 14px;
+  padding: 8px;
+}
