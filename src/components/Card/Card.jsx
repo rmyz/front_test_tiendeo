@@ -5,11 +5,27 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Icon from "@material-ui/core/Icon";
+import placeholderImage from "../../assets/tiendeo.png";
+import { useLocalStorage, initialItems } from "../../utils";
+
 import "./Card.css";
 
-export const Card = ({ title, description, imgUrl }) => {
+export const Card = ({ id, title, description, imgUrl }) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [items, setItems] = useLocalStorage(
+    "items",
+    initialItems(),
+    "ADD_ITEMS"
+  );
+
+  const setFormValues = useLocalStorage("formValues", {}, "SET_FORM_VALUES")[1];
+
+  const setIsDialogOpened = useLocalStorage(
+    "isDialogOpened",
+    false,
+    "TOGGLE_DIALOG"
+  )[1];
 
   const onMouseEnter = event => {
     setOpen(true);
@@ -21,9 +37,15 @@ export const Card = ({ title, description, imgUrl }) => {
     setAnchorEl(null);
   };
 
-  const handleOnClickDelete = () => {};
+  const handleOnClickDelete = () => {
+    const _items = items.filter(item => item.id !== id);
+    setItems(_items, "ADD_ITEMS");
+  };
 
-  const handleOnClickEdit = () => {};
+  const handleOnClickEdit = () => {
+    setFormValues({ id, title, description, imgUrl });
+    setIsDialogOpened(true);
+  };
 
   return (
     <div
@@ -45,7 +67,15 @@ export const Card = ({ title, description, imgUrl }) => {
         </Popper>
       )}
       <div className="Card__imageWrapper">
-        {imgUrl && <img className="Card__image" src={imgUrl} alt="news" />}
+        {(imgUrl && (
+          <img className="Card__image" data-lazy={imgUrl} alt="news" />
+        )) || (
+          <img
+            className="Card__image"
+            data-lazy={placeholderImage}
+            alt="news"
+          />
+        )}
       </div>
       <div className="Card__title">{title}</div>
       <div className="Card__description">{description}</div>
@@ -54,6 +84,7 @@ export const Card = ({ title, description, imgUrl }) => {
 };
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imgUrl: PropTypes.string

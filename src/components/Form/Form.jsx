@@ -1,32 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useLocalStorage } from "../../utils";
+
 import "./Form.css";
 
 export const Form = ({ handleClose, handleSubmit }) => {
-  const [values, setValues] = useState({});
+  const [formValues, setFormValues] = useLocalStorage(
+    "formValues",
+    {},
+    "SET_FORM_VALUES"
+  );
 
   const handleChange = field => event => {
-    setValues({ ...values, [field]: event.target.value });
+    setFormValues({ ...formValues, [field]: event.target.value });
   };
 
   const _handleSubmit = () => {
-    if (values.title && values.description) handleSubmit(values);
+    if (!formValues.id) {
+      formValues.id = Math.floor(Math.random() * 100);
+    }
+    if (formValues.title && formValues.description) {
+      handleSubmit({
+        ...formValues,
+        id: formValues.id
+      });
+    }
     handleClose();
   };
 
   return (
     <form>
-      <DialogTitle id="form-dialog-title">New Card</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        {(formValues.id && <span>Edit Card</span>) || <span>New Card</span>}
+      </DialogTitle>
       <DialogContent>
         <TextField
           id="title"
           label="Title"
           required
-          value={values.title}
+          value={formValues.title}
           onChange={handleChange("title")}
           fullWidth
           margin="normal"
@@ -35,7 +51,7 @@ export const Form = ({ handleClose, handleSubmit }) => {
           id="description"
           label="Description"
           required
-          value={values.description}
+          value={formValues.description}
           onChange={handleChange("description")}
           fullWidth
           margin="normal"
@@ -43,7 +59,7 @@ export const Form = ({ handleClose, handleSubmit }) => {
         <TextField
           id="imgUrl"
           label="Image Source (url)"
-          value={values.imgUrl}
+          value={formValues.imgUrl}
           onChange={handleChange("imgUrl")}
           fullWidth
           margin="normal"
@@ -54,7 +70,7 @@ export const Form = ({ handleClose, handleSubmit }) => {
           Cancel
         </Button>
         <Button onClick={_handleSubmit} color="primary">
-          Add
+          {(formValues.id && <span>Edit</span>) || <span>Add</span>}
         </Button>
       </DialogActions>
     </form>

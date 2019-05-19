@@ -10,7 +10,8 @@ export const CardWrapper = ({ items }) => {
       {items.map(item => {
         return (
           <Card
-            key={item.title}
+            id={item.id}
+            key={item.id}
             title={item.title}
             imgUrl={item.imgUrl}
             description={item.description}
@@ -24,6 +25,7 @@ export const CardWrapper = ({ items }) => {
 CardWrapper.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number,
       title: PropTypes.string,
       description: PropTypes.string,
       imgUrl: PropTypes.string
