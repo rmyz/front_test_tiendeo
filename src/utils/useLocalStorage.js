@@ -1,26 +1,29 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { Store } from "../store";
 
-export default function(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
+export default function(key, initialValue, type) {
+  const { state, dispatch } = useContext(Store);
+
+  useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
-      if (item) return JSON.parse(item);
+      if (item) return dispatch({ type, payload: JSON.parse(item) });
 
       window.localStorage.setItem(key, JSON.stringify(initialValue));
-      return initialValue;
+      return dispatch({ type, payload: initialValue });
     } catch {
-      return initialValue;
+      return dispatch({ type, payload: initialValue });
     }
-  });
+  }, []);
 
-  const setValue = value => {
+  const setValue = (value, type) => {
     try {
-      setStoredValue(value);
+      dispatch({ type, payload: value });
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.error(error);
     }
   };
 
-  return [storedValue, setValue];
+  return [state[key], setValue];
 }
