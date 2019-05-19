@@ -14,6 +14,7 @@ export default function(key, initialValue, type) {
     } catch {
       return dispatch({ type, payload: initialValue });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setValue = (value, type) => {
