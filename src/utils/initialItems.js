@@ -16,7 +16,7 @@ export default function() {
     },
     {
       title:
-        "‘Game of Thrones’ Season 8, Episode 5 Recap: The Bells Toll for Daenerys",
+        "Game of Thrones Season 8, Episode 5 Recap: The Bells Toll for Daenerys",
       description:
         "In Sunday’s thrilling, horrifying, frustrating episode, the Last War engulfed King’s Landing, and this season’s death toll shot up significantly.",
       imgUrl:
