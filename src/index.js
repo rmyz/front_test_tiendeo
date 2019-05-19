@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import Home from "./pages/Home";
+import { StoreProvider } from "./store";
+import "./index.css";
 
-ReactDOM.render(<Home />, document.getElementById("root"));
+ReactDOM.render(
+  <StoreProvider>
+    <Home />
+  </StoreProvider>,
+  document.getElementById("root")
+);
