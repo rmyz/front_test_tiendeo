@@ -5,6 +5,7 @@ import Card from "../Card";
 import "./CardWrapper.css";
 
 export const CardWrapper = ({ items }) => {
+  if (!items.length) return null;
   return (
     <div className="CardWrapper">
       {items.map(item => {
