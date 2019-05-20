@@ -13,11 +13,7 @@ import "./Card.css";
 export const Card = ({ id, title, description, imgUrl }) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [items, setItems] = useLocalStorage(
-    "items",
-    initialItems(),
-    "ADD_ITEMS"
-  );
+  const [items, setItems] = useLocalStorage("items", initialItems, "ADD_ITEMS");
 
   const setFormValues = useLocalStorage("formValues", {}, "SET_FORM_VALUES")[1];
 

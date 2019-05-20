@@ -18,11 +18,7 @@ import "./Home.css";
 
 export const Home = () => {
   const [orderBy, setOrderBy] = useLocalStorage("orderBy", "", "ORDER_BY");
-  const [items, setItems] = useLocalStorage(
-    "items",
-    initialItems(),
-    "ADD_ITEMS"
-  );
+  const [items, setItems] = useLocalStorage("items", initialItems, "ADD_ITEMS");
   const [isDialogOpened, setIsDialogOpened] = useLocalStorage(
     "isDialogOpened",
     false,
