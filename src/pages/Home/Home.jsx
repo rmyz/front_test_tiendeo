@@ -41,16 +41,16 @@ export const Home = () => {
   };
 
   const handleChange = event => {
-    setOrderBy(event.target.value, "ORDER_BY");
-    setItems(orderItems(event.target.value), "ADD_ITEMS");
+    setOrderBy(event.target.value);
+    setItems(orderItems(event.target.value));
   };
 
   const addItem = item => {
     if (checkIdExists(item.id, items)) {
       const _items = items.filter(_item => item.id !== _item.id);
-      return setItems([..._items, item], "ADD_ITEMS");
+      return setItems([..._items, item]);
     }
-    return setItems([...items, item], "ADD_ITEMS");
+    return setItems([...items, item]);
   };
 
   return (

@@ -35,7 +35,7 @@ export const Card = ({ id, title, description, imgUrl }) => {
 
   const handleOnClickDelete = () => {
     const _items = items.filter(item => item.id !== id);
-    setItems(_items, "ADD_ITEMS");
+    setItems(_items);
   };
 
   const handleOnClickEdit = () => {

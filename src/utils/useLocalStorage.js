@@ -17,7 +17,7 @@ export default function(key, initialValue, type) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setValue = (value, type) => {
+  const setValue = value => {
     try {
       dispatch({ type, payload: value });
       window.localStorage.setItem(key, JSON.stringify(value));
