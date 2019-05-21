@@ -42,7 +42,7 @@ export const Home = () => {
 
   const handleChange = event => {
     setOrderBy(event.target.value);
-    setItems(orderItems(event.target.value));
+    setItems(orderItems(event.target.value, items));
   };
 
   const addItem = item => {
