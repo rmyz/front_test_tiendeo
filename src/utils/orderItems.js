@@ -4,23 +4,23 @@ const compareFunc = (a, b) => {
   return 0;
 };
 
-const orderAsc = () => {
-  const _items = JSON.parse(window.localStorage.getItem("items"));
-  return _items.sort((a, b) => compareFunc(a, b));
+const orderAsc = items => {
+  return items.sort((a, b) => compareFunc(a, b));
 };
 
-const orderDesc = () => {
-  const _items = JSON.parse(window.localStorage.getItem("items"));
-  return _items.sort((a, b) => compareFunc(b, a));
+const orderDesc = items => {
+  return items.sort((a, b) => compareFunc(b, a));
 };
 
-export default function(order) {
+export default function(order, items) {
+  if (!items) return null;
+
   switch (order) {
     case "asc":
-      return orderAsc();
+      return orderAsc(items);
     case "desc":
-      return orderDesc();
+      return orderDesc(items);
     default:
-      break;
+      return items;
   }
 }
