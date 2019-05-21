@@ -4,12 +4,12 @@ const compareFunc = (a, b) => {
   return 0;
 };
 
-const orderDesc = () => {
+const orderAsc = () => {
   const _items = JSON.parse(window.localStorage.getItem("items"));
   return _items.sort((a, b) => compareFunc(a, b));
 };
 
-const orderAsc = () => {
+const orderDesc = () => {
   const _items = JSON.parse(window.localStorage.getItem("items"));
   return _items.sort((a, b) => compareFunc(b, a));
 };
