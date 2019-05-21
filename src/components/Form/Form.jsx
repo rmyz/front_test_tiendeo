@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import { useLocalStorage } from "../../utils";
 
 import "./Form.css";
+
+const noOp = () => {};
 
 export const Form = ({ handleClose, handleSubmit }) => {
   const [formValues, setFormValues] = useLocalStorage(
@@ -75,4 +78,14 @@ export const Form = ({ handleClose, handleSubmit }) => {
       </DialogActions>
     </form>
   );
+};
+
+Form.propTypes = {
+  handleClose: PropTypes.func,
+  handleSubmit: PropTypes.func
+};
+
+Form.defaultProps = {
+  handleClose: noOp,
+  handleSubmit: noOp
 };
